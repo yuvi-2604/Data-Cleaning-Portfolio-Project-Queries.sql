@@ -147,19 +147,20 @@ join layoffs_staging2 t2
 set t1.industry = t2.industry
 where t1.industry is null
 and t2.industry is not null;
-    
+
+-- 4. Remove Any unwanted Columns or Rows 
+
 select *
 from layoffs_staging2
 where total_laid_off is null
 and percentage_laid_off is null;
+
 
 delete
 from layoffs_staging2
 where total_laid_off is null
 and percentage_laid_off is null;
 
-
--- 4. Remove Any unwanted Columns or Rows 
 
 alter table layoffs_staging2
 drop column row_num;
