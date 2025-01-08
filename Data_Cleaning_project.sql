@@ -4,6 +4,10 @@
 -- 3. Null values or Blank values
 -- 4. Remove Any Columns or Rows
 
+------------------------------------------------------------------------------------------------------------------------------
+
+-- 1. Remove Duplicates
+
 create table Layoffs_staging
 like layoffs;
 
@@ -71,7 +75,7 @@ select *
 from layoffs_staging2
 ;
 
--- Standardizing
+-- 2.Standardizing
 
 select company, trim(company)
 from layoffs_staging2;
@@ -113,6 +117,8 @@ MODIFY COLUMN `date` date;
 select `date`
 from layoffs_staging2;
 
+-- 3.Dealing Null values or Blank values
+
 select *
 from layoffs_staging2
 where total_laid_off is null
@@ -152,6 +158,8 @@ from layoffs_staging2
 where total_laid_off is null
 and percentage_laid_off is null;
 
+
+-- 4. Remove Any unwanted Columns or Rows 
 
 alter table layoffs_staging2
 drop column row_num;
